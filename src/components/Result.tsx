@@ -1,7 +1,11 @@
-'use client';
+"use client";
 
-import { Answer } from '@/types/hds-r';
-import { QUESTIONS, MAX_TOTAL_SCORE, DEMENTIA_THRESHOLD } from '@/data/questions';
+import { Answer } from "@/types/hds-r";
+import {
+  QUESTIONS,
+  MAX_TOTAL_SCORE,
+  DEMENTIA_THRESHOLD,
+} from "@/data/questions";
 
 interface ResultProps {
   answers: Answer[];
@@ -9,7 +13,11 @@ interface ResultProps {
   onRestart: () => void;
 }
 
-export default function Result({ answers, totalScore, onRestart }: ResultProps) {
+export default function Result({
+  answers,
+  totalScore,
+  onRestart,
+}: ResultProps) {
   const percentage = (totalScore / MAX_TOTAL_SCORE) * 100;
   const hasConcern = totalScore <= DEMENTIA_THRESHOLD;
 
@@ -20,9 +28,7 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="bg-white rounded-lg shadow-lg p-8 print:shadow-none">
-        <h1 className="text-3xl font-bold text-center mb-8">
-          改訂長谷川式簡易知能評価（HDS-R）結果
-        </h1>
+        <h1 className="text-3xl font-bold text-center mb-8">結果</h1>
 
         {/* スコア表示 */}
         <div className="mb-8">
@@ -30,7 +36,10 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
             <div className="inline-block">
               <div className="text-6xl font-bold text-blue-600 mb-2">
                 {totalScore}
-                <span className="text-3xl text-gray-400"> / {MAX_TOTAL_SCORE}</span>
+                <span className="text-3xl text-gray-400">
+                  {" "}
+                  / {MAX_TOTAL_SCORE}
+                </span>
               </div>
               <div className="text-sm text-gray-900">合計得点</div>
             </div>
@@ -40,7 +49,11 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
           <div className="w-full bg-gray-200 rounded-full h-4 mb-2">
             <div
               className={`h-4 rounded-full transition-all duration-500 ${
-                hasConcern ? 'bg-red-500' : percentage < 80 ? 'bg-yellow-500' : 'bg-green-500'
+                hasConcern
+                  ? "bg-red-500"
+                  : percentage < 80
+                  ? "bg-yellow-500"
+                  : "bg-green-500"
               }`}
               style={{ width: `${percentage}%` }}
             />
@@ -55,7 +68,9 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
           <h2 className="text-xl font-bold mb-4 text-gray-900">各設問の得点</h2>
           <div className="space-y-2">
             {answers.map((answer, index) => {
-              const question = QUESTIONS.find((q) => q.id === answer.questionId);
+              const question = QUESTIONS.find(
+                (q) => q.id === answer.questionId
+              );
               if (!question) return null;
 
               return (
@@ -64,11 +79,23 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
                   className="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
                 >
                   <div className="flex-1">
-                    <div className="font-medium text-gray-900">問{question.id}: {question.type}</div>
-                    <div className="text-sm text-gray-900">{question.question}</div>
+                    <div className="font-medium text-gray-900">
+                      問{question.id}: {question.type}
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {question.question}
+                    </div>
                   </div>
                   <div className="text-right ml-4">
-                    <div className={`text-lg font-bold ${answer.score === question.maxScore ? 'text-green-600' : answer.score > 0 ? 'text-yellow-600' : 'text-red-600'}`}>
+                    <div
+                      className={`text-lg font-bold ${
+                        answer.score === question.maxScore
+                          ? "text-green-600"
+                          : answer.score > 0
+                          ? "text-yellow-600"
+                          : "text-red-600"
+                      }`}
+                    >
                       {answer.score} / {question.maxScore}点
                     </div>
                   </div>
@@ -84,7 +111,9 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
           <ul className="space-y-1">
             <li>• この検査は認知症のスクリーニング検査です。</li>
             <li>• 確定診断には医療機関での詳しい検査が必要です。</li>
-            <li>• 結果は年齢、教育歴、体調などの影響を受ける場合があります。</li>
+            <li>
+              • 結果は年齢、教育歴、体調などの影響を受ける場合があります。
+            </li>
             <li>• 心配な場合は、専門医にご相談ください。</li>
           </ul>
         </div>
@@ -107,7 +136,7 @@ export default function Result({ answers, totalScore, onRestart }: ResultProps) 
 
         {/* フッター */}
         <div className="mt-8 pt-4 border-t border-gray-200 text-xs text-gray-900 text-center">
-          <p>実施日時: {new Date().toLocaleString('ja-JP')}</p>
+          <p>実施日時: {new Date().toLocaleString("ja-JP")}</p>
           <p className="mt-1">
             出典: 加藤仲司ほか: 老年精神医学雑誌 1991; 2: 1339
           </p>

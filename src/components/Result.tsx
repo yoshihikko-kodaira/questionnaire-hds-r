@@ -109,7 +109,6 @@ export default function Result({
         <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-8 text-sm text-gray-900">
           <h3 className="font-bold mb-2">注意事項</h3>
           <ul className="space-y-1">
-            <li>• この検査は認知症のスクリーニング検査です。</li>
             <li>• 確定診断には医療機関での詳しい検査が必要です。</li>
             <li>
               • 結果は年齢、教育歴、体調などの影響を受ける場合があります。
